@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn
 import torchvision
@@ -10,11 +11,12 @@ from model import WasedaColorizationNet
 from dataset import Gray2RGBDataset
 from tools import Lab2RGB
 
-# model_path = "/home/shimizu/waseda_color/model/Places365_standard256.pth"
-model_path = "/home/shimizu/waseda_color/model/ImageNet/ILSVRC2012.pth"
-
-# test_data_path = "/home/shimizu/Places/test_256/"
-test_data_path = "/home/shimizu/ImageNet/ILSVRC2012_img_test/"
+# model_path = "~/waseda_color/model/Places365_standard256.pth"
+model_path = "~/waseda_color/model/ImageNet/ILSVRC2012.pth"
+model_path = os.path.expanduser(model_path)
+# test_data_path = "~/Places/test_256/"
+test_data_path = "~/ImageNet/ILSVRC2012_img_test/"
+test_data_path = os.path.expanduser(test_data_path)
 test_img_files = glob.glob(test_data_path+"*")
 
 np.random.seed(0)
@@ -43,7 +45,7 @@ with tqdm(test_dataloader, total=len(test_dataloader)) as pbar:
 
         input_gray_img = input_gray_img.to(device)
 
-        torchvision.utils.save_image(input_gray_img, fp="/home/shimizu/waseda_color/output/Places/gray_1000/"+name)
+        torchvision.utils.save_image(input_gray_img, fp="./output/ImageNet/gray_1000/"+name)
         input_scale_img = input_scale_img.to(device)
 
         output_ab, class_pred = model(input_gray_img, input_scale_img)
@@ -57,7 +59,7 @@ with tqdm(test_dataloader, total=len(test_dataloader)) as pbar:
 
         output_img = Image.fromarray(np.clip(output_img*255.0, a_min=0, a_max=255).astype(np.uint8))
 
-        output_img.save("/home/shimizu/waseda_color/output/ImageNet/2023_1024/"+name)
+        output_img.save("./output/ImageNet/2023_1201/"+name)
         
         i += 1
 

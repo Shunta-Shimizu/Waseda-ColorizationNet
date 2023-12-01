@@ -14,12 +14,15 @@ train_img_files = []
 val_img_files = [] 
 
 # Places365
-# train_data_path = "/home/shimizu/Places/data_256/"
-# val_data_path = "/home/shimizu/Places/val_256/"
+# train_data_path = "~/Places/data_256/"
+# val_data_path = "~/Places/val_256/"
 
 # ImageNet
-train_data_path = "/home/shimizu/ImageNet/ILSVRC2012_img_train/"
-val_data_path = "/home/shimizu/ImageNet/ILSVRC2012_img_val/"
+train_data_path = "~/ImageNet/ILSVRC2012_img_train/"
+val_data_path = "~/ImageNet/ILSVRC2012_img_val/"
+train_data_path = os.path.expanduser(train_data_path)
+val_data_path = os.path.expanduser(val_data_path)
+
 transform = torchvision.transforms.Compose([torchvision.transforms.ToTensor(), torchvision.transforms.RandomHorizontalFlip(p=0.5)])
 
 for file in glob.glob(train_data_path+"**", recursive=True):
@@ -103,20 +106,16 @@ for i in range(epochs):
 
     if i == 0:
         min_loss = val_epoch_loss
-        # min_loss = sum_loss*batch_size / len(val_dataloader.dataset)
-        # min_loss = sum_loss / len(test_dataloader)
     else:
-        # loss_i = sum_loss * batch_size / len(test_loader.dataset)
-        # loss_i = sum_loss*batch_size / len(val_dataloader.dataset)
         loss_i = val_epoch_loss
         if loss_i < min_loss:
             min_loss = loss_i
             model = model.to("cpu")
-            torch.save(model.module.state_dict(), "/home/shimizu/waseda_color/model/ImageNet/ILSVRC2012.pth")
+            torch.save(model.module.state_dict(), "./model/ImageNet/ILSVRC2012.pth")
             print("save model")
             model = model.to(device)
         elif (i+1)%10 == 0:
             model = model.to("cpu")
-            torch.save(model.module.state_dict(), "/home/shimizu/waseda_color/model/ImageNet/ILSVRC2012_epoch{}.pth".format(str(i+1)))
+            torch.save(model.module.state_dict(), "./model/ImageNet/ILSVRC2012_epoch{}.pth".format(str(i+1)))
             print("save model")
             model = model.to(device)

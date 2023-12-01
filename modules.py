@@ -33,13 +33,10 @@ class LowLevelFeaturesNet(nn.Module):
         )
 
     def forward(self, x):
-        # print(x.size())
         x = self.low_features_block1(x)
-        # print(x.size())
         x = self.low_features_block2(x)
-        # print(x.size())
         x = self.low_features_block3(x)
-        # print(x.size())
+
         return x
 
 
@@ -95,9 +92,7 @@ class GlobalFeaturesNet(nn.Module):
 
     def forward(self, x):
         x = self.global_featrues_block1(x)
-        # print(x.size())
         x = self.global_featrues_block2(x)
-        # print(x.size())
         x = x.view(-1, 7*7*512)
         x = self.global_featrues_block3(x)
         x_class = x
@@ -139,9 +134,8 @@ class FusionLayer(nn.Module):
         x2 = x2.permute(0, 3, 1, 2)
 
         x_fusion = torch.cat((x1, x2), 1)
-        # print(x_fusion.size())
         x_fusion = self.fusion_conv(x_fusion)
-        # print(x_fusion.size())
+
         return x_fusion
 
 class ColorizationNet(nn.Module):
@@ -174,15 +168,11 @@ class ColorizationNet(nn.Module):
         # self.up = nn.Upsample(scale_factor=scale_factor, mode=mode)
     
     def forward(self, x):
-        # print(x.size())
         x = self.color_block1(x)
-        # print(x.size())
         x = self.color_block2(x)
-        # print(x.size())
         x = self.color_block3(x)
-        # print(x.size())
         x = self.output(x)
-        # print(x.size())
+
         return x
     
 class OutputLayer(nn.Module):
@@ -192,9 +182,6 @@ class OutputLayer(nn.Module):
     
     def forward(self, x):
         x = self.up(x)
-        # print(x_input.size())
-        # x_out = torch.cat((x, x_input), 1)
-        # print(x_out.size())
 
         return x
 

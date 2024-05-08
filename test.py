@@ -52,8 +52,8 @@ with tqdm(test_dataloader, total=len(test_dataloader)) as pbar:
 
         input_gray_img = input_gray_img.squeeze(0)
         output_ab = output_ab.squeeze(0) 
-        L = input_gray_img.to("cpu").detach().numpy().copy().transpose(1, 2, 0).astype(np.float64)
-        output_ab = output_ab.to("cpu").detach().numpy().copy().transpose(1, 2, 0).astype(np.float64)
+        L = input_gray_img.to("cpu").detach().numpy().copy().transpose(1, 2, 0).astype(np.float32)
+        output_ab = output_ab.to("cpu").detach().numpy().copy().transpose(1, 2, 0).astype(np.float32)
 
         output_img = Lab2RGB(L, output_ab)
 

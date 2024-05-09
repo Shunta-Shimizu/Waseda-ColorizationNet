@@ -20,12 +20,12 @@ pip install opencv-python numpy scikit-image
 
 ### Train
 ```
-python train.py --train_data_dir /xxxx/yyyy/zzzz/ --save_model_dir ./model/
+python train.py --train_data_dir /xxx/yyy/zzz/ --val_data_dir /aaa/bbb/ --save_model_dir ./model/
 ````
 
 ### Test
 ```
-python test.py --test_data_dir /xxx/yyyy/wwwww/ --model_path ./model/xxx.pth --save_result_dir /aaa/bbb/
+python test.py --test_data_dir /xxx/yyy/wwww/ --model_path ./model/xxx.pth --save_result_dir /aaa/bbb/
 ```
 
 ### Tasks

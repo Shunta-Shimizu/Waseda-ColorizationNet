@@ -20,12 +20,12 @@ pip install opencv-python numpy scikit-image
 
 ### Train
 ```
-python train.py \
---train_data_dir /xxx/yyy/zzz/ \
---val_data_dir /aaa/bbb/ \
---save_model_dir ./model/ \
---batch_size n \
---num_epochs m
+python train.py                \
+ --train_data_dir /xxx/yyy/zzz/ \
+ --val_data_dir /aaa/bbb/       \
+ --save_model_dir ./model/      \
+ --batch_size n                 \
+ --num_epochs m
 ````
 
 ### Test

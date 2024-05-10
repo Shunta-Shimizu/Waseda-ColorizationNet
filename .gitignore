@@ -1,11 +1,8 @@
 *.png
 *.jpg
 *.JPEG
-<<<<<<< HEAD
 *.pyc
-=======
 *.JPG
 *.pyc
 *.pth
 waseda_color.yml
->>>>>>> ad03fd0 (Upload files)
